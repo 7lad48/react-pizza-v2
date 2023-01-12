@@ -5,9 +5,10 @@ import Header from "./components/Header/Header";
 import Categories from "./components/Categories/Categories";
 import Sort from "./components/Sort/Sort";
 import PizzaBlock from "./components/PizzaBlock/PizzaBlock";
-
+import pizzaItems from './assets/pizza.json'
 
 function App() {
+    console.log(pizzaItems);
     return (
         <div className="wrapper">
         <Header/>
@@ -19,10 +20,18 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        <PizzaBlock title="Мексиканская" price={450} />
-                        <PizzaBlock title="Чизбургер-пицца" price={400} />
-                        <PizzaBlock title="Пепперони" price={350} />
-                        <PizzaBlock title="Маргаритта" price={300} />
+                        {
+                            pizzaItems.map((pizzaItem,index) => {
+                                return <PizzaBlock 
+                                        title={pizzaItem.title} 
+                                        price={pizzaItem.price} 
+                                        image={pizzaItem.imageUrl} 
+                                        sizes={pizzaItem.sizes} 
+                                        />
+                            })
+                        }
+                        
+                        
                     </div>
                 </div>
             </div>

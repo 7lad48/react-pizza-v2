@@ -2,7 +2,7 @@ import React from "react";
 
 function PizzaBlock({title, price, imageUrl, sizes, types}) {
     const [activeType, setActiveType] = React.useState(0);
-    const [activSize, setActiveSize] = React.useState(0);
+    const [activeSize, setActiveSize] = React.useState(0);
 
     const typeNames = ['традиционное', 'тонкое'];
     return (
@@ -24,7 +24,7 @@ function PizzaBlock({title, price, imageUrl, sizes, types}) {
                 <ul>
                     {
                         sizes.map((size, sizeIndex) =>{
-                            return <li onClick={ () => { setActiveSize(sizeIndex) }} className={activSize === sizeIndex ? 'active' : ''}>{size} см.</li>
+                            return <li onClick={ () => { setActiveSize(sizeIndex) }} className={activeSize === sizeIndex ? 'active' : ''}>{size} см.</li>
                         })
                     }
                 </ul>

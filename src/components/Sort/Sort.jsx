@@ -18,7 +18,7 @@ function Sort() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={ () => { open ? setOpen(false) : setOpen(true)}}>популярности</span>
+                <span onClick={ () => {setOpen(!open)} }>популярности</span>
             </div>
             {open && (
             <div className="sort__popup">

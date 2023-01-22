@@ -5,10 +5,15 @@ import Header from "./components/Header/Header";
 import Categories from "./components/Categories/Categories";
 import Sort from "./components/Sort/Sort";
 import PizzaBlock from "./components/PizzaBlock/PizzaBlock";
-import pizzaItems from './assets/pizza.json'
+
 
 function App() {
-
+    const [pizzaItems, setPizzaItems] = React.useState([]);
+    React.useEffect( () => {
+        fetch('https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems')
+        .then( (response) => response.json() )
+        .then( (json) => setPizzaItems(json) )
+    }, []);
     return (
         <div className="wrapper">
         <Header/>

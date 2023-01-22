@@ -31,11 +31,7 @@ function Sort() {
                 <ul>
                     {
                         sortList.map((element, index) => {
-                          return <li
-                              key={index}
-                              onClick={() => {onSelectSortCategory(index)}}
-                              className={selectedSort === index ? 'active' : ''}>{element}
-                          </li>
+                        return <li key={index} onClick={() => {onSelectSortCategory(index)}} className={selectedSort === index ? 'active' : ''}>{element}</li>
                         })
                     }
                 </ul>

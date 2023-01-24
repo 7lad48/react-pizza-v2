@@ -4,15 +4,20 @@ import './scss/app.scss'
 import Header from "./components/Header/Header";
 import Categories from "./components/Categories/Categories";
 import Sort from "./components/Sort/Sort";
-import PizzaBlock from "./components/PizzaBlock/PizzaBlock";
-
+import PizzaBlock from "./components/PizzaBlock";
+import PizzaPreloader from "./components/PizzaBlock/PizzaPreloader";
+const itemsLink = 'https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems';
 
 function App() {
     const [pizzaItems, setPizzaItems] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
     React.useEffect( () => {
-        fetch('https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems')
+        fetch(itemsLink)
         .then( (response) => response.json() )
-        .then( (json) => setPizzaItems(json) )
+        .then( (json) => {
+            setPizzaItems(json);
+            setIsLoading(false);
+        })
     }, []);
     return (
         <div className="wrapper">
@@ -25,13 +30,10 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        {
-                            pizzaItems.map((pizzaItem) => {
-                                return <PizzaBlock key={pizzaItem.id} {...pizzaItem} />
-                            })
+                        {isLoading 
+                            ? [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} /> ) 
+                            : pizzaItems.map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} /> )
                         }
-                        
-                        
                     </div>
                 </div>
             </div>

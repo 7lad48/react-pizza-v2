@@ -1,40 +1,17 @@
 import React from "react";
-
 import './scss/app.scss'
 import Header from "./components/Header/Header";
-import Categories from "./components/Categories/Categories";
-import Sort from "./components/Sort/Sort";
-import PizzaBlock from "./components/PizzaBlock";
-import PizzaPreloader from "./components/PizzaBlock/PizzaPreloader";
-const itemsLink = 'https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems';
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 function App() {
-    const [pizzaItems, setPizzaItems] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-    React.useEffect( () => {
-        fetch(itemsLink)
-        .then( (response) => response.json() )
-        .then( (json) => {
-            setPizzaItems(json);
-            setIsLoading(false);
-        })
-    }, []);
+
     return (
         <div className="wrapper">
-        <Header/>
+            <Header/>
             <div className="content">
                 <div className="container">
-                    <div className="content__top">
-                        <Categories/>
-                        <Sort/>
-                    </div>
-                    <h2 className="content__title">Все пиццы</h2>
-                    <div className="content__items">
-                        {isLoading 
-                            ? [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} /> ) 
-                            : pizzaItems.map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} /> )
-                        }
-                    </div>
+                    <NotFound/>
                 </div>
             </div>
         </div>

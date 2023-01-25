@@ -4,9 +4,9 @@ import emptyImage from '../../assets/img/pizza-logo.svg';
 const NotFoundContent = () => {
 
     return (<div className={styles.content}>
-        <h2 className={styles.title}>Страница не найдена <icon className={styles.icon}>😕</icon></h2>
+        <h2 className={styles.title}>Страница не найдена <span className={styles.icon}>😕</span></h2>
         <p className={styles.description}>Такой страницы не существует на этом сайте.</p>
-        <img src={emptyImage} alt="Empty cart"/>
+        <img src={emptyImage} alt="not found logo"/>
     </div>)
 }
 

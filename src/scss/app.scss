@@ -24,15 +24,29 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    //display: grid;
+    //grid-template-columns: repeat(4, 1fr);
+    //grid-column-gap: 20px;
+    //grid-row-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    grid-gap: 65px 30px;
+    //justify-content: center;
+    place-items: center;
   }
 
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 1300px) {
+      flex-direction: column-reverse;
+
+      .categories{
+        margin-top: 30px;
+      }
+    }
   }
 }
 
@@ -50,6 +64,9 @@ body {
 }
 
 .cart {
+  .content__items{
+    display:block;
+  }
   &__top {
     display: flex;
     justify-content: space-between;

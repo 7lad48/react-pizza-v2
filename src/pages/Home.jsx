@@ -16,6 +16,7 @@ function Home() {
             setPizzaItems(json);
             setIsLoading(false);
         })
+        window.scrollTo(0,0);
     }, []);
     return (
         <>

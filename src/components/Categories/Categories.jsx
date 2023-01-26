@@ -1,8 +1,8 @@
 import React from "react";
 
-function Categories() {
+function Categories({categoryId}) {
+    console.log(categoryId);
     const [activeIndex, setActiveIndex] = React.useState(0);
-
     const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
     return (
         <div className="categories">

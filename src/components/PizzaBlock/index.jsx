@@ -16,22 +16,22 @@ function PizzaBlock({title, price, imageUrl, sizes, types}) {
             <div className="pizza-block__selector">
                 <ul>
                     {
-                        types.map((type) =>{
-                            return <li onClick={ () => { setActiveType(type) }} className={activeType === type ? 'active' : ''}>{typeNames[type]}</li>
+                        types.map((type, index) =>{
+                            return <li key={index} onClick={ () => { setActiveType(type) }} className={activeType === type ? 'active' : ''}>{typeNames[type]}</li>
                         })
                     }
                 </ul>
                 <ul>
                     {
                         sizes.map((size, sizeIndex) =>{
-                            return <li onClick={ () => { setActiveSize(sizeIndex) }} className={activeSize === sizeIndex ? 'active' : ''}>{size} см.</li>
+                            return <li key={sizeIndex} onClick={ () => { setActiveSize(sizeIndex) }} className={activeSize === sizeIndex ? 'active' : ''}>{size} см.</li>
                         })
                     }
                 </ul>
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <button onClick='' className="button button--outline button--add">
+                <button  className="button button--outline button--add">
                     <svg
                         width="12"
                         height="12"

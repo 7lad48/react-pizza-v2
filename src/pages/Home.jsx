@@ -9,6 +9,9 @@ const itemsLink = 'https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems';
 function Home() {
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [categoryId, setCategoryId] = React.useState(0);
+    const [sortType, setSortType] = React.useState(0);
+
     React.useEffect( () => {
         fetch(itemsLink)
         .then( (response) => response.json() )
@@ -21,7 +24,7 @@ function Home() {
     return (
         <>
         <div className="content__top">
-            <Categories/>
+            <Categories categoryId={categoryId} />
             <Sort/>
         </div>
         <h2 className="content__title">Все пиццы</h2>

@@ -1,9 +1,11 @@
 import React from "react";
 
-function Sort() {
+function Sort({selectedSort, setSelectedSort}) {
     const [open, setOpen] = React.useState(false);
     const sortList = ['популярности', 'цене', 'алфавиту'];
-    const [selectedSort, setSelectedSort] = React.useState(0);
+
+    //const [selectedSort, setSelectedSort] = React.useState(0);
+
     const onSelectSortCategory = (sortItem) => {
         setSelectedSort(sortItem)
         setOpen(false)

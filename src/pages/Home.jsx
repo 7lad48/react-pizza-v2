@@ -24,8 +24,8 @@ function Home() {
     return (
         <>
         <div className="content__top">
-            <Categories categoryId={categoryId} />
-            <Sort/>
+            <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} />
+            <Sort selectedSort={sortType} setSelectedSort={setSortType} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

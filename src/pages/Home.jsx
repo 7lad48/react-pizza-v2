@@ -4,28 +4,35 @@ import Categories from "../components/Categories/Categories";
 import Sort from "../components/Sort/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaPreloader from "../components/PizzaBlock/PizzaPreloader";
-const itemsLink = 'https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems';
 
 function Home() {
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [categoryId, setCategoryId] = React.useState(0);
-    const [sortType, setSortType] = React.useState(0);
+    const [sortType, setSortType] = React.useState({
+        name: 'популярности', 
+        sortBy: 'rating',
+    });
+    const [enableSortArrow, setEnableSortArrow] = React.useState(true);
 
     React.useEffect( () => {
-        fetch(itemsLink)
+        setIsLoading(true);
+        const category = categoryId > 0 ? `category=${categoryId}` : '';
+        const sortBy = sortType.sortBy;
+        const order = enableSortArrow ? 'desc' : 'asc';
+        fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}&sortBy=${sortBy}&order=${order}`)
         .then( (response) => response.json() )
         .then( (json) => {
             setPizzaItems(json);
             setIsLoading(false);
         })
         window.scrollTo(0,0);
-    }, []);
+    }, [categoryId, sortType, enableSortArrow]);
     return (
         <>
         <div className="content__top">
             <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} />
-            <Sort selectedSort={sortType} setSelectedSort={setSortType} />
+            <Sort selectedSort={sortType} setSelectedSort={setSortType} enableSortArrow={enableSortArrow} setEnableSortArrow={setEnableSortArrow}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

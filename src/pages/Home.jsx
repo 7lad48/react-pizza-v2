@@ -13,13 +13,13 @@ function Home() {
         name: 'популярности', 
         sortBy: 'rating',
     });
-    const [enableSortArrow, setEnableSortArrow] = React.useState(true);
+    const [sortArrowToggle, setSortArrowToggle] = React.useState(true);
 
     React.useEffect( () => {
         setIsLoading(true);
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const sortBy = sortType.sortBy;
-        const order = enableSortArrow ? 'desc' : 'asc';
+        const order = sortArrowToggle ? 'desc' : 'asc';
         fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}&sortBy=${sortBy}&order=${order}`)
         .then( (response) => response.json() )
         .then( (json) => {
@@ -27,12 +27,12 @@ function Home() {
             setIsLoading(false);
         })
         window.scrollTo(0,0);
-    }, [categoryId, sortType, enableSortArrow]);
+    }, [categoryId, sortType, sortArrowToggle]);
     return (
         <>
         <div className="content__top">
             <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} />
-            <Sort selectedSort={sortType} setSelectedSort={setSortType} enableSortArrow={enableSortArrow} setEnableSortArrow={setEnableSortArrow}/>
+            <Sort selectedSort={sortType} setSelectedSort={setSortType} sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

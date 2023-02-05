@@ -20,22 +20,23 @@ function Home({searchValue}) {
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const sortBy = sortType.sortBy;
         const order = sortArrowToggle ? 'desc' : 'asc';
-        fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}&sortBy=${sortBy}&order=${order}`)
+        const search = searchValue ? `&search=${searchValue}` : '';
+        fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}${search}&sortBy=${sortBy}&order=${order}`)
         .then( (response) => response.json() )
         .then( (json) => {
             setPizzaItems(json);
             setIsLoading(false);
         })
         window.scrollTo(0,0);
-    }, [categoryId, sortType, sortArrowToggle]);
+    }, [categoryId, sortType, sortArrowToggle, searchValue]);
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
-        .filter( (pizzaItem) => {
-            if(pizzaItem.title.toLowerCase().includes(searchValue.toLowerCase())) {
-                return true;
-            }
-        })
+        // .filter( (pizzaItem) => {
+        //     if(pizzaItem.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        //         return true;
+        //     }
+        // })
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
 
 

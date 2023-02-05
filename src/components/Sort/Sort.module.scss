@@ -1,10 +1,13 @@
 @import '../../scss/variables';
-button{
-    padding:5px;
+
+button {
+  padding: 5px;
 }
+
 .sort {
   position: relative;
   display: flex;
+
   &__label {
     display: flex;
     align-items: center;
@@ -34,6 +37,7 @@ button{
 
     ul {
       overflow: hidden;
+
       li {
         padding: 12px 20px;
         cursor: pointer;
@@ -51,22 +55,26 @@ button{
     }
   }
 }
+
 .arrow {
-    margin-left: 10px;
-    border:1px solid gray;
-    padding:5px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: ease-in-out .2s;
-    svg{
-        transform: rotate(180deg);
-    }
-    &.active,
-    &:hover{
-        background-color: #fe5d1e23;
-        border:1px solid rgba(128, 128, 128, 0.541);
-    }
-    &.active svg{
-        transform: rotate(0deg);
-    }
+  margin-left: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.8);
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: ease-in-out .2s;
+
+  svg {
+    transform: rotate(180deg);
+  }
+
+  &.active,
+  &:hover {
+    background-color: #fe5d1e23;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+  }
+
+  &.active svg {
+    transform: rotate(0deg);
+  }
 }

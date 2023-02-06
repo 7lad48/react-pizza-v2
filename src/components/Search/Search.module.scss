@@ -9,18 +9,20 @@
   font-size: 16px;
   width: 320px;
   color: gray;
-  transition: all .25s ease-in-out;
+  transition: all .3s ease-in-out;
   &:focus{
     color: #464646;
-    border:1px solid orange;
-    width: 360px;
+    border:1px solid rgba(255, 165, 0, 0.7);;
+    //width: 360px;
   }
   //&:focus+.icon{
   //  fill: orange;
   //  opacity: .6;
   //}
+  &::placeholder {
+    transition: all .3s ease-in-out;
+  }
   &:focus::placeholder {
-    content: '';
     color: rgba(255, 165, 0, 0.2);
   }
 }

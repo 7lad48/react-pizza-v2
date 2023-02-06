@@ -4,6 +4,7 @@ import Categories from "../components/Categories/Categories";
 import Sort from "../components/Sort/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaPreloader from "../components/PizzaBlock/PizzaPreloader";
+import Pagination from "../components/Pagination/Pagination";
 
 function Home({searchValue}) {
     const [pizzaItems, setPizzaItems] = React.useState([]);
@@ -26,8 +27,9 @@ function Home({searchValue}) {
         .then( (json) => {
             setPizzaItems(json);
             setIsLoading(false);
+            
         })
-        window.scrollTo(0,0);
+       // window.scrollTo(0,0);
     }, [categoryId, sortType, sortArrowToggle, searchValue]);
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
@@ -38,21 +40,33 @@ function Home({searchValue}) {
         //     }
         // })
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
-
-
+    //---pagination----
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [pizzaItemsPerPage] = React.useState(8);
+    const lastItemIndex = currentPage * pizzaItemsPerPage;
+    const firstItemIndex = lastItemIndex - pizzaItemsPerPage;
+    const displayedPizzaItems = items.slice(firstItemIndex, lastItemIndex);
+    const lastPage = Math.ceil(pizzaItems.length / pizzaItemsPerPage);
+    const setPage = pageNumber => {
+        if(pageNumber > 0 && pageNumber <= lastPage){
+            setCurrentPage(pageNumber);
+        }
+    }
+    //-----------------
     return (
         <>
         <div className="content__top">
-            <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} />
+            <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} setCurrentPage={setCurrentPage} />
             <Sort selectedSort={sortType} setSelectedSort={setSortType} sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
             {isLoading 
                 ? skeletons
-                : items
+                : displayedPizzaItems.length > 0 ? displayedPizzaItems : 'Пиццы не найдены'
             }
         </div>
+        <Pagination setPage={setPage} currentPage={currentPage} lastPage={lastPage}/>
         </>
     );
 }

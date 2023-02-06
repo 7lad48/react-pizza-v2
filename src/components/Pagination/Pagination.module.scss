@@ -1,0 +1,80 @@
+.pageItems{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.pageItem{
+    font-size: 18px;
+    border: 1px solid rgb(180, 180, 180);
+    padding: 10px 14px;
+    border-radius: 20%;
+    color: rgb(90, 90, 90);
+    transition: ease-in-out .15s;
+    &:hover{
+        border: 1px solid rgb(216, 216, 216);
+        background-color: rgba(255, 166, 0, 0.2);
+        cursor: pointer;
+    }
+    &.active{
+        color: black;
+        background-color: rgb(247, 247, 247);
+        border: 1px solid rgb(235, 235, 235);;
+        cursor: default;
+    }
+}
+.btn{
+    position: relative;
+    cursor: pointer;
+    min-width:25px;
+    &:after,
+    &:before{
+    content: '';
+    position: absolute;
+    width:4px;
+    height: 20px;
+    background-color: rgba(255, 166, 0, 0.9);
+    border-radius: 10px;
+    }
+}
+.btn.btnDisabled{
+    cursor: default;
+}
+.btnDisabled{
+    &:after,
+    &:before{
+        background-color: rgba(240, 240, 240, 0.9);
+        cursor: default;
+    }
+}
+.btnNext{
+    margin-left: 20px;
+    &:after,
+    &:before{
+        left:50%;
+    }
+    &:before{
+        transform:rotate(-40deg);
+        top:6px;
+        
+    }
+    &:after{
+        transform:rotate(40deg);
+        bottom:7px;
+    }
+}
+.btnPrev{
+    margin-right: 20px;
+    &:after,
+    &:before{
+        right:50%;
+    }
+    &:before{
+        transform:rotate(40deg);
+        top:6px;
+    }
+    &:after{
+        transform:rotate(-40deg);
+        bottom:7px;
+    }
+}

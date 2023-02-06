@@ -3,11 +3,9 @@ import styles from './Pagination.module.scss'
 
 const Pagination = ({setPage, currentPage, lastPage}) => {
     const pageNumbers = [];
-
     for (let i = 1; i <= lastPage; i++) {
         pageNumbers.push(i);
     }
-
     return (
         <>
         {pageNumbers.length > 1 && <div className={styles.pageItems}>
@@ -23,5 +21,4 @@ const Pagination = ({setPage, currentPage, lastPage}) => {
         </>
     )
 }
-
 export default Pagination;

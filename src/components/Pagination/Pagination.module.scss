@@ -37,16 +37,6 @@
     border-radius: 10px;
     }
 }
-.btn.btnDisabled{
-    cursor: default;
-}
-.btnDisabled{
-    &:after,
-    &:before{
-        background-color: rgba(240, 240, 240, 0.9);
-        cursor: default;
-    }
-}
 .btnNext{
     margin-left: 20px;
     &:after,
@@ -62,6 +52,9 @@
         transform:rotate(40deg);
         bottom:7px;
     }
+    &:hover{
+        opacity: .5;
+    }
 }
 .btnPrev{
     margin-right: 20px;
@@ -76,5 +69,21 @@
     &:after{
         transform:rotate(-40deg);
         bottom:7px;
+    }
+    &:hover{
+        opacity: .5;
+    }
+}
+.btn.btnDisabled{
+    cursor: default;
+}
+.btnDisabled{
+    &:after,
+    &:before{
+        background-color: rgba(240, 240, 240, 0.9);
+        cursor: default;
+    }
+    &:hover{
+        opacity: 1;
     }
 }

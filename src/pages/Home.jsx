@@ -5,8 +5,12 @@ import Sort from "../components/Sort/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaPreloader from "../components/PizzaBlock/PizzaPreloader";
 import Pagination from "../components/Pagination/Pagination";
+import {SearchContext} from "../App";
 
-function Home({searchValue}) {
+
+
+function Home() {
+    const {searchValue} = React.useContext(SearchContext);
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [categoryId, setCategoryId] = React.useState(0);
@@ -34,13 +38,15 @@ function Home({searchValue}) {
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
+        //---filter(frontendSide)----
         // .filter( (pizzaItem) => {
         //     if(pizzaItem.title.toLowerCase().includes(searchValue.toLowerCase())) {
         //         return true;
         //     }
         // })
+        //-----------------
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
-    //---pagination----
+    //---pagination(frontendSide)----
     const [currentPage, setCurrentPage] = React.useState(1);
     const [pizzaItemsPerPage] = React.useState(8);
     const lastItemIndex = currentPage * pizzaItemsPerPage;

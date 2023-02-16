@@ -1,4 +1,7 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from "../redux/slices/filterSlice";
+
 import '../scss/app.scss'
 import Categories from "../components/Categories/Categories";
 import Sort from "../components/Sort/Sort";
@@ -10,16 +13,30 @@ import {SearchContext} from "../App";
 
 
 function Home() {
+
+    const categoryId = useSelector(state => state.filter.categoryId);
+    const dispatch = useDispatch();
+
+    console.log('id category', categoryId);
+
+
+
+
+
     const {searchValue} = React.useContext(SearchContext);
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [categoryId, setCategoryId] = React.useState(0);
+    //const [categoryId, setCategoryId] = React.useState(0);
     const [sortType, setSortType] = React.useState({
         name: 'популярности', 
         sortBy: 'rating',
     });
     const [sortArrowToggle, setSortArrowToggle] = React.useState(true);
 
+    const onChangeCategory = (id) => {
+        dispatch(setCategoryId(id));
+    }
+    
     React.useEffect( () => {
         setIsLoading(true);
         const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -62,7 +79,7 @@ function Home() {
     return (
         <>
         <div className="content__top">
-            <Categories activeIndex={categoryId} setActiveIndex={ (id) => setCategoryId(id)} setCurrentPage={setCurrentPage} />
+            <Categories activeIndex={categoryId} setActiveIndex={onChangeCategory} setCurrentPage={setCurrentPage} />
             <Sort selectedSort={sortType} setSelectedSort={setSortType} sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>

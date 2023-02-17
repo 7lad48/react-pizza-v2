@@ -1,9 +1,7 @@
 import React from "react";
+const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
 
 function Categories({activeIndex, setActiveIndex, setCurrentPage}) {
-    //const [activeIndex, setActiveIndex] = React.useState(0);
-
-    const categories = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'];
     const setCategory = (index) => {
         setActiveIndex(index)
         setCurrentPage(1);

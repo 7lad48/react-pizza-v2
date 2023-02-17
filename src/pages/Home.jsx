@@ -10,27 +10,15 @@ import PizzaPreloader from "../components/PizzaBlock/PizzaPreloader";
 import Pagination from "../components/Pagination/Pagination";
 import {SearchContext} from "../App";
 
-
-
 function Home() {
-
-    const categoryId = useSelector(state => state.filter.categoryId);
     const dispatch = useDispatch();
-
-    console.log('id category', categoryId);
-
-
-
-
+    const categoryId = useSelector(state => state.filter.categoryId);
+    const sortType = useSelector(state => state.filter.sort);
 
     const {searchValue} = React.useContext(SearchContext);
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    //const [categoryId, setCategoryId] = React.useState(0);
-    const [sortType, setSortType] = React.useState({
-        name: 'популярности', 
-        sortBy: 'rating',
-    });
+
     const [sortArrowToggle, setSortArrowToggle] = React.useState(true);
 
     const onChangeCategory = (id) => {
@@ -48,21 +36,14 @@ function Home() {
         .then( (json) => {
             setPizzaItems(json);
             setIsLoading(false);
-            
         })
        // window.scrollTo(0,0);
     }, [categoryId, sortType, sortArrowToggle, searchValue]);
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
-        //---filter(frontendSide)----
-        // .filter( (pizzaItem) => {
-        //     if(pizzaItem.title.toLowerCase().includes(searchValue.toLowerCase())) {
-        //         return true;
-        //     }
-        // })
-        //-----------------
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
+
     //---pagination(frontendSide)----
     const [currentPage, setCurrentPage] = React.useState(1);
     const [pizzaItemsPerPage] = React.useState(8);
@@ -80,7 +61,7 @@ function Home() {
         <>
         <div className="content__top">
             <Categories activeIndex={categoryId} setActiveIndex={onChangeCategory} setCurrentPage={setCurrentPage} />
-            <Sort selectedSort={sortType} setSelectedSort={setSortType} sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
+            <Sort sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

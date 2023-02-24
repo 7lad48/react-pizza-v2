@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from "../redux/slices/filterSlice";
-
-import '../scss/app.scss'
 import Categories from "../components/Categories/Categories";
 import Sort from "../components/Sort/Sort";
 import PizzaBlock from "../components/PizzaBlock";

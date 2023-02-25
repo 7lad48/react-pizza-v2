@@ -17,8 +17,6 @@ function Home() {
     const [pizzaItems, setPizzaItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
-    const [sortArrowToggle, setSortArrowToggle] = React.useState(true);
-
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
     }
@@ -27,16 +25,16 @@ function Home() {
         setIsLoading(true);
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const sortBy = sortType.sortBy;
-        const order = sortArrowToggle ? 'desc' : 'asc';
+        const sortOrder = sortType.type === 'desc' ? 'desc' : 'asc';
         const search = searchValue ? `&search=${searchValue}` : '';
-        fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}${search}&sortBy=${sortBy}&order=${order}`)
+        fetch(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}${search}&sortBy=${sortBy}&order=${sortOrder}`)
         .then( (response) => response.json() )
         .then( (json) => {
             setPizzaItems(json);
             setIsLoading(false);
         })
        // window.scrollTo(0,0);
-    }, [categoryId, sortType, sortArrowToggle, searchValue]);
+    }, [categoryId, sortType, searchValue]);
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
@@ -59,7 +57,7 @@ function Home() {
         <>
         <div className="content__top">
             <Categories activeIndex={categoryId} setActiveIndex={onChangeCategory} setCurrentPage={setCurrentPage} />
-            <Sort sortArrowToggle={sortArrowToggle} setSortArrowToggle={setSortArrowToggle}/>
+            <Sort />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

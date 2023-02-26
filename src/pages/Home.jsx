@@ -30,19 +30,15 @@ function Home() {
         const search = searchValue ? `&search=${searchValue}` : '';
         axios.get(`https://63c7e0cc075b3f3a91d4fb16.mockapi.io/pizzaItems?${category}${search}&sortBy=${sortBy}&order=${sortOrder}`)
         .then((response) => {
-            console.log(response);
             setPizzaItems(response.data);
             setIsLoading(false);
         });
-
-
        // window.scrollTo(0,0);
     }, [categoryId, sortType, searchValue]);
 
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
-
     //---pagination(frontendSide)----
     const [currentPage, setCurrentPage] = React.useState(1);
     const [pizzaItemsPerPage] = React.useState(8);

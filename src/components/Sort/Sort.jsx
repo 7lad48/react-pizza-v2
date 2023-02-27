@@ -13,6 +13,7 @@ function Sort() {
     const sort = useSelector(state => state.filter.sort);
     const sortOrder = sort.type === 'desc';
     const [open, setOpen] = React.useState(false);
+    const sortRef = React.useRef();
 
     const onSelectSortCategory = (sortItem) => {
         dispatch(setSortType(sortItem));
@@ -25,8 +26,21 @@ function Sort() {
             dispatch(setOrder('desc'));
         }
     }
+    React.useEffect(() =>{
+        const handleClickOutside = (event) =>{
+            const path = event.composedPath().includes(sortRef.current);
+            if(!path){
+                setOpen(false)
+                console.log('ы')
+            }
+        }
+        document.body.addEventListener('click', handleClickOutside);
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
+        }
+    },[]);
     return (
-        <div className={styles.sort}>
+        <div ref={sortRef} className={styles.sort}>
             <div className={styles.sort__label}>
                 <b>Сортировка по:</b>
                 <span onClick={() => {setOpen(!open)}}>{sort.name}</span>

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import qs from "qs";
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories/Categories";
@@ -39,7 +40,7 @@ function Home() {
     const skeletons = [...new Array(6)].map( (_, index) => <PizzaPreloader key={index} />);
     const items = pizzaItems
         .map( (pizzaItem) => <PizzaBlock key={pizzaItem.id} {...pizzaItem} />);
-    //---pagination(frontendSide)----
+    //---pagination----
     const [currentPage, setCurrentPage] = React.useState(1);
     const [pizzaItemsPerPage] = React.useState(8);
     const lastItemIndex = currentPage * pizzaItemsPerPage;
